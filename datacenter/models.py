@@ -2,6 +2,17 @@ from django.db import models
 from django.utils.timezone import localtime
 from datetime import timedelta
 
+def get_duration(visit):
+    delta = localtime() - localtime(visit.entered_at)
+    if visit.leaved_at:
+        delta = localtime(visit.leaved_at) - localtime(visit.entered_at)
+    delta -= timedelta(microseconds=delta.microseconds)
+    return delta
+
+
+def format_duration(duration):
+    return f"{int(duration.total_seconds()) // 3600}:{int(duration.total_seconds()) % 3600 // 60}"
+
 
 class Passcard(models.Model):
     is_active = models.BooleanField(default=False)
