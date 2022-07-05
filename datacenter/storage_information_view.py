@@ -16,8 +16,6 @@ def format_duration(duration):
 
 
 def storage_information_view(request):
-    # Программируем здесь
-
     non_cls_visits = Visit.objects.filter(leaved_at=None)
     non_closed_visits = []
     for v in non_cls_visits:

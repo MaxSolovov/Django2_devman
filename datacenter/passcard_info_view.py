@@ -4,6 +4,7 @@ from django.shortcuts import render
 from django.utils.timezone import localtime
 from datetime import timedelta
 
+
 def get_duration(visit):
     delta = localtime() - localtime(visit.entered_at)
     if visit.leaved_at:
@@ -11,22 +12,15 @@ def get_duration(visit):
     delta -= timedelta(microseconds=delta.microseconds)
     return delta
 
+
 def format_duration(duration):
     return f"{int(duration.total_seconds()) // 3600}:{int(duration.total_seconds()) % 3600 // 60}"
 
+
 def passcard_info_view(request, passcode):
-    # passcard = Passcard.objects.all()[0]
-    # Программируем здесь
     passcard = Passcard.objects.get(passcode=passcode)
     visits = Visit.objects.filter(passcard=passcard)
-    # this_passcard_visits = [
-    #     {
-    #         'entered_at': '11-04-2018',
-    #         'duration': '25:03',
-    #         'is_strange': False
-    #     },
-    # ]
-    print(passcard.owner_name, len(visits))
+    print(passcard.owner_name, len(visits))  # вывод в консоль
     this_passcard_visits = []
     for v in visits:
         vis = {

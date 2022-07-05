@@ -2,6 +2,7 @@ from django.db import models
 from django.utils.timezone import localtime
 from datetime import timedelta
 
+
 class Passcard(models.Model):
     is_active = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now=True)
@@ -26,7 +27,6 @@ class Visit(models.Model):
             delta = localtime(self.leaved_at) - localtime(self.entered_at)
         delta -= timedelta(microseconds=delta.microseconds)
         return int(delta.total_seconds()) // 60 > minutes
-
 
     def __str__(self):
         return '{user} entered at {entered} {leaved}'.format(
