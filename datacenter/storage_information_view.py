@@ -15,6 +15,6 @@ def storage_information_view(request):
         serializad_nonclosed_visits.append(one_person_visit)
 
     context = {
-        'non_closed_visits': serializad_nonclosed_visits,  # не закрытые посещения
+        'non_closed_visits': serializad_nonclosed_visits,
     }
     return render(request, 'storage_information.html', context)
